@@ -28,6 +28,12 @@ Pour coller les secondes avec le symbole `"` (`36°16'43.05" N`), entourez le ch
 
 Ajoutez la ligne, ouvrez une pull request ou poussez sur `main`. La CI lance `python3 validate_positions.py docs/positions.csv`. Une fois mergée, GitHub Pages republie la carte **sans régénération**.
 
+MarineTraffic verrouille la lat/lon dans l'interface et sert une page Cloudflare aux fetch HTTP (GitHub Actions compris). On ne simule pas de session navigateur pour contourner ça. Coller le relevé dans le CSV, ou enregistrer la page HTML depuis *votre* navigateur puis :
+
+```bash
+python3 fetch_ais.py --html page.html --csv docs/positions.csv
+```
+
 Prévisualisation locale :
 
 ```bash

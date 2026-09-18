@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.13"
-      - run: python3 -m unittest -q test_validate_positions.py
+      - run: python3 -m unittest discover -q
       - run: python3 validate_positions.py docs/positions.csv
 
   deploy:
