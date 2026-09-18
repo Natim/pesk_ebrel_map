@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Voilier">
+  <rect width="32" height="32" rx="6" fill="#0b6e99"/>
+  <polygon points="16,4 16,21 27,21" fill="#f4f7fa"/>
+  <polygon points="15,8 15,21 6,21" fill="#c5dce8"/>
+  <rect x="14.5" y="4" width="1.6" height="18.5" fill="#f4f7fa"/>
+  <path d="M5.5 22.5h21l-2.4 5.2H8z" fill="#14384a"/>
+  <path d="M4 28.2c3.2-.9 6.4.4 9.6.4s6.4-1.3 9.6-.4 6.4.4 8.8-.6" fill="none" stroke="#9fd0e6" stroke-width="1.2" stroke-linecap="round"/>
+</svg>
