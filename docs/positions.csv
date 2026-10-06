@@ -37,14 +37,7 @@ observed_at,latitude,longitude,speed_kn,course_deg,alarms,note
 2026-09-28T09:13:22Z,29.193933,-13.548883,3,136,,AIS MarineTraffic
 2026-09-28T09:53:28Z,29.209682,-13.522583,3,60,,AIS MarineTraffic
 2026-09-30T12:11:46Z,29.150316,-13.70035,4.6,242,,AIS MarineTraffic
-2026-09-30T14:22:00Z,29.02,-13.95,5.5,200,,"estimated, west of Lanzarote"
 2026-09-30T16:49:56Z,28.867733,-13.903283,7.9,150,,AIS MarineTraffic
 2026-09-30T17:07:19Z,28.845316,-13.883483,6.3,123,,AIS MarineTraffic
 2026-09-30T20:10:22Z,28.85635,-13.816183,0.6,175,,AIS MarineTraffic
-2026-10-04T13:20:00Z,28.845,-13.79,5,110,,"estimated, east of Lanzarote"
-2026-10-04T14:20:00Z,28.84,-13.72,5,50,,"estimated, east of Lanzarote"
-2026-10-04T15:20:00Z,28.88,-13.65,5,30,,"estimated, east of Lanzarote"
-2026-10-04T16:20:00Z,28.92,-13.60,5,20,,"estimated, east of Lanzarote"
-2026-10-04T17:20:00Z,28.95,-13.54,5,15,,"estimated, east of Lanzarote"
-2026-10-04T18:20:00Z,28.962,-13.528,4,14,,"estimated, east of Lanzarote"
 2026-10-04T19:34:19Z,28.968134,-13.531767,3.9,14,,AIS MarineTraffic
