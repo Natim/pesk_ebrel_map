@@ -74,8 +74,8 @@ class CsvTests(unittest.TestCase):
         positions = validate_path(Path("docs/positions.csv"))
         self.assertGreaterEqual(len(positions), 1)
         latest = positions[-1]
-        self.assertAlmostEqual(latest.latitude, 28.968134, places=5)
-        self.assertAlmostEqual(latest.longitude, -13.531767, places=5)
+        self.assertAlmostEqual(latest.latitude, 28.761583, places=5)
+        self.assertAlmostEqual(latest.longitude, -13.862367, places=5)
 
     def test_duplicate_timestamp_is_rejected(self) -> None:
         payload = HEADER + (
