@@ -49,6 +49,7 @@ class AisFix:
     longitude: float
     speed_kn: float | None
     course_deg: float | None
+    alarms: str = ""
 
 
 class FetchError(RuntimeError):
@@ -178,13 +179,13 @@ def format_optional(value: float | None) -> str:
     return f"{value:g}"
 
 
-def append_fix(csv_path: Path, fix: AisFix) -> bool:
+def append_fix(csv_path: Path, fix: AisFix, *, note: str = NOTE) -> bool:
     positions = validate_path(csv_path)
     latest = positions[-1]
     if fix.observed_at <= latest.observed_at:
         print(
-            f"No new AIS report (latest CSV {format_iso(latest.observed_at)}, "
-            f"page {format_iso(fix.observed_at)})"
+            f"No new position (latest CSV {format_iso(latest.observed_at)}, "
+            f"fetched {format_iso(fix.observed_at)})"
         )
         return False
 
@@ -194,8 +195,8 @@ def append_fix(csv_path: Path, fix: AisFix) -> bool:
         "longitude": f"{fix.longitude:.6f}".rstrip("0").rstrip("."),
         "speed_kn": format_optional(fix.speed_kn),
         "course_deg": format_optional(fix.course_deg),
-        "alarms": "",
-        "note": NOTE,
+        "alarms": fix.alarms,
+        "note": note,
     }
     with csv_path.open("a", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=REQUIRED_COLUMNS, lineterminator="\n")

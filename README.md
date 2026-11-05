@@ -28,6 +28,18 @@ Pour coller les secondes avec le symbole `"` (`36°16'43.05" N`), entourez le ch
 
 Ajoutez la ligne, ouvrez une pull request ou poussez sur `main`. La CI lance `python3 validate_positions.py docs/positions.csv`. Une fois mergée, GitHub Pages republie la carte **sans régénération**.
 
+### Konectis (automatique)
+
+La balise publique [Konectis](https://www.konectis.com/embed/12684aeeab22233e7323c2b0f5197001) publie la dernière position GPS (~3 relevés par jour). Le workflow [Refresh Konectis GPS](.github/workflows/refresh-konectis.yml) tourne **toutes les heures** : il lit le JSON `dataPreload`, ajoute une ligne dans le CSV si l’horodatage est plus récent, puis pousse sur `main`.
+
+```bash
+python3 fetch_konectis.py --csv docs/positions.csv
+```
+
+Pour que le bot puisse pousser : **Settings → Actions → General → Workflow permissions → Read and write**.
+
+### MarineTraffic (manuel)
+
 MarineTraffic verrouille la lat/lon dans l'interface et sert une page Cloudflare aux fetch HTTP (GitHub Actions compris). On ne simule pas de session navigateur pour contourner ça. Coller le relevé dans le CSV, ou enregistrer la page HTML depuis *votre* navigateur puis :
 
 ```bash

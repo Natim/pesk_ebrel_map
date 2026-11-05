@@ -1,0 +1,41 @@
+name: Refresh Konectis GPS
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-konectis
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Fetch latest Konectis position
+        run: python3 fetch_konectis.py --csv docs/positions.csv
+
+      - name: Commit and push if CSV changed
+        run: |
+          if git diff --quiet -- docs/positions.csv; then
+            echo "No new Konectis position."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/positions.csv
+          git commit -m "$(cat <<'EOF'
+feat(track): add Konectis GPS fix
+EOF
+)"
+          git push
