@@ -203,3 +203,4 @@ observed_at,latitude,longitude,speed_kn,course_deg,alarms,note
 2026-10-28T18:01:42Z,28.391134,-16.293982,6.3,39,,AIS MarineTraffic
 2026-10-28T19:53:02Z,28.467751,-16.244101,0.6,339,,AIS MarineTraffic (Santa Cruz de Tenerife)
 2026-11-05T00:40:50Z,28.467711,-16.244166,0,180,,GPS Konectis
+2026-11-05T12:49:55Z,28.467733,-16.244166,0,0,,GPS Konectis
