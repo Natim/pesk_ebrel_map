@@ -34,8 +34,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/positions.csv
-          git commit -m "$(cat <<'EOF'
-feat(track): add Konectis GPS fix
-EOF
-)"
+          git commit -m "feat(track): add Konectis GPS fix"
           git push
