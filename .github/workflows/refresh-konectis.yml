@@ -2,7 +2,7 @@ name: Refresh Konectis GPS
 
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "52 * * * *"
   workflow_dispatch:
 
 permissions:

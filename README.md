@@ -30,7 +30,7 @@ Ajoutez la ligne, ouvrez une pull request ou poussez sur `main`. La CI lance `py
 
 ### Konectis (automatique)
 
-La balise publique [Konectis](https://www.konectis.com/embed/12684aeeab22233e7323c2b0f5197001) publie la dernière position GPS (~3 relevés par jour). Le workflow [Refresh Konectis GPS](.github/workflows/refresh-konectis.yml) tourne **toutes les heures** : il lit le JSON `dataPreload`, ajoute une ligne dans le CSV si l’horodatage est plus récent, puis pousse sur `main`.
+La balise publique [Konectis](https://www.konectis.com/embed/12684aeeab22233e7323c2b0f5197001) publie la dernière position GPS (~3 relevés par jour). Le workflow [Refresh Konectis GPS](.github/workflows/refresh-konectis.yml) tourne **à :52 UTC chaque heure** (décalé par rapport à :00 pour limiter la charge côté GitHub) : il lit le JSON `dataPreload`, ajoute une ligne dans le CSV si l’horodatage est plus récent, puis pousse sur `main`.
 
 ```bash
 python3 fetch_konectis.py --csv docs/positions.csv
