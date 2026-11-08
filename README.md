@@ -38,6 +38,8 @@ python3 fetch_konectis.py --csv docs/positions.csv
 
 Pour que le bot puisse pousser : **Settings → Actions → General → Workflow permissions → Read and write**.
 
+Les commits poussés par Actions avec `GITHUB_TOKEN` ne déclenchent pas le workflow CI. Quand le CSV change, ce job déploie donc GitHub Pages lui-même (comme le job `deploy` de la CI).
+
 ### MarineTraffic (manuel)
 
 MarineTraffic verrouille la lat/lon dans l'interface et sert une page Cloudflare aux fetch HTTP (GitHub Actions compris). On ne simule pas de session navigateur pour contourner ça. Coller le relevé dans le CSV, ou enregistrer la page HTML depuis *votre* navigateur puis :

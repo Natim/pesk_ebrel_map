@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: refresh-konectis
@@ -15,6 +17,12 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7
 
@@ -25,14 +33,29 @@ jobs:
       - name: Fetch latest Konectis position
         run: python3 fetch_konectis.py --csv docs/positions.csv
 
-      - name: Commit and push if CSV changed
+      - name: Commit, validate, and push if CSV changed
+        id: publish
         run: |
           if git diff --quiet -- docs/positions.csv; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No new Konectis position."
             exit 0
           fi
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          python3 -m unittest discover -q
+          python3 validate_positions.py docs/positions.csv
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/positions.csv
           git commit -m "feat(track): add Konectis GPS fix"
           git push
+
+      - name: Upload Pages artifact
+        if: steps.publish.outputs.changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - id: deployment
+        if: steps.publish.outputs.changed == 'true'
+        uses: actions/deploy-pages@v4
