@@ -11,11 +11,20 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-from fetch_ais import AisFix, FetchError, append_fix, fetch_html
-from validate_positions import ValidationError, parse_observed_at, parse_optional_float
+from fetch_ais import (
+    AisFix,
+    FetchError,
+    append_fix,
+    fetch_html,
+    format_iso,
+    update_last_fix,
+)
+from validate_positions import ValidationError, parse_observed_at, parse_optional_float, validate_path
 
 DEFAULT_URL = "https://www.konectis.com/embed/12684aeeab22233e7323c2b0f5197001"
 NOTE = "GPS Konectis"
+# ~0.001° ≈ 100 m at this latitude — treat as the same berth.
+SAME_POSITION_DEG = 0.001
 
 DATA_PRELOAD_RE = re.compile(
     r"dataPreload\s*=\s*(\{.*?\})\s*;\s*l10nPreload",
@@ -110,6 +119,36 @@ def parse_embed_page(html: str) -> AisFix:
     )
 
 
+def same_position(
+    lat_a: float,
+    lon_a: float,
+    lat_b: float,
+    lon_b: float,
+    *,
+    threshold_deg: float = SAME_POSITION_DEG,
+) -> bool:
+    return abs(lat_a - lat_b) <= threshold_deg and abs(lon_a - lon_b) <= threshold_deg
+
+
+def apply_konectis_fix(csv_path: Path, fix: AisFix) -> bool:
+    """Append at a new place, or refresh the lone Konectis pin when still at berth."""
+    positions = validate_path(csv_path)
+    latest = positions[-1]
+    if fix.observed_at <= latest.observed_at:
+        print(
+            f"No new position (latest CSV {format_iso(latest.observed_at)}, "
+            f"fetched {format_iso(fix.observed_at)})"
+        )
+        return False
+
+    if same_position(fix.latitude, fix.longitude, latest.latitude, latest.longitude):
+        if latest.note == NOTE:
+            return update_last_fix(csv_path, fix, note=NOTE)
+        return append_fix(csv_path, fix, note=NOTE)
+
+    return append_fix(csv_path, fix, note=NOTE)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--csv", type=Path, default=Path("docs/positions.csv"))
@@ -119,7 +158,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         html = args.html.read_text(encoding="utf-8") if args.html else fetch_html(args.url)
         fix = parse_embed_page(html)
-        append_fix(args.csv, fix, note=NOTE)
+        apply_konectis_fix(args.csv, fix)
     except (FetchError, ValidationError) as exc:
         print(exc, file=sys.stderr)
         return 1

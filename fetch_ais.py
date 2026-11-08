@@ -179,6 +179,18 @@ def format_optional(value: float | None) -> str:
     return f"{value:g}"
 
 
+def fix_to_row(fix: AisFix, note: str) -> dict[str, str]:
+    return {
+        "observed_at": format_iso(fix.observed_at),
+        "latitude": f"{fix.latitude:.6f}".rstrip("0").rstrip("."),
+        "longitude": f"{fix.longitude:.6f}".rstrip("0").rstrip("."),
+        "speed_kn": format_optional(fix.speed_kn),
+        "course_deg": format_optional(fix.course_deg),
+        "alarms": fix.alarms,
+        "note": note,
+    }
+
+
 def append_fix(csv_path: Path, fix: AisFix, *, note: str = NOTE) -> bool:
     positions = validate_path(csv_path)
     latest = positions[-1]
@@ -189,21 +201,45 @@ def append_fix(csv_path: Path, fix: AisFix, *, note: str = NOTE) -> bool:
         )
         return False
 
-    row = {
-        "observed_at": format_iso(fix.observed_at),
-        "latitude": f"{fix.latitude:.6f}".rstrip("0").rstrip("."),
-        "longitude": f"{fix.longitude:.6f}".rstrip("0").rstrip("."),
-        "speed_kn": format_optional(fix.speed_kn),
-        "course_deg": format_optional(fix.course_deg),
-        "alarms": fix.alarms,
-        "note": note,
-    }
+    row = fix_to_row(fix, note)
     with csv_path.open("a", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=REQUIRED_COLUMNS, lineterminator="\n")
         writer.writerow(row)
     validate_path(csv_path)
     print(
         f"Appended {row['observed_at']} at {row['latitude']}, {row['longitude']} "
+        f"{row['speed_kn']} kn {row['course_deg']}°"
+    )
+    return True
+
+
+def update_last_fix(csv_path: Path, fix: AisFix, *, note: str = NOTE) -> bool:
+    positions = validate_path(csv_path)
+    latest = positions[-1]
+    if fix.observed_at <= latest.observed_at:
+        print(
+            f"No newer position (latest CSV {format_iso(latest.observed_at)}, "
+            f"fetched {format_iso(fix.observed_at)})"
+        )
+        return False
+
+    with csv_path.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        if reader.fieldnames is None:
+            raise ValidationError(f"{csv_path}: CSV has no header")
+        rows = list(reader)
+    if not rows:
+        raise ValidationError(f"{csv_path}: no position rows")
+
+    row = fix_to_row(fix, note)
+    rows[-1] = row
+    with csv_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=REQUIRED_COLUMNS, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+    validate_path(csv_path)
+    print(
+        f"Updated {row['observed_at']} at {row['latitude']}, {row['longitude']} "
         f"{row['speed_kn']} kn {row['course_deg']}°"
     )
     return True

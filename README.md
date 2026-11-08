@@ -36,6 +36,8 @@ La balise publique [Konectis](https://www.konectis.com/embed/12684aeeab22233e732
 python3 fetch_konectis.py --csv docs/positions.csv
 ```
 
+Au mouillage, une nouvelle ligne Konectis n’est ajoutée qu’une fois (après le dernier point AIS ou GPS déjà proche). Les relevés suivants au même endroit **mettent à jour** ce pin Konectis (horodatage et cap), sans empiler une ligne par passage du cron.
+
 Pour que le bot puisse pousser : **Settings → Actions → General → Workflow permissions → Read and write**.
 
 Les commits poussés par Actions avec `GITHUB_TOKEN` ne déclenchent pas le workflow CI. Quand le CSV change, ce job déploie donc GitHub Pages lui-même (comme le job `deploy` de la CI).

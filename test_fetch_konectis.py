@@ -5,9 +5,8 @@ import unittest
 from datetime import datetime, timezone
 from pathlib import Path
 
-from fetch_ais import append_fix
-from fetch_konectis import parse_embed_page, NOTE
 from fetch_ais import AisFix
+from fetch_konectis import NOTE, apply_konectis_fix, parse_embed_page, same_position
 from validate_positions import validate_path
 
 FIXTURE = """
@@ -52,9 +51,13 @@ class ParseEmbedTests(unittest.TestCase):
         with self.assertRaisesRegex(Exception, "LastPosition"):
             parse_embed_page(html)
 
+    def test_same_position_threshold(self) -> None:
+        self.assertTrue(same_position(28.467711, -16.244166, 28.467679, -16.244166))
+        self.assertFalse(same_position(28.467711, -16.244166, 28.46, -16.244166))
 
-class AppendKonectisTests(unittest.TestCase):
-    def test_appends_newer_konectis_fix(self) -> None:
+
+class ApplyKonectisTests(unittest.TestCase):
+    def test_appends_first_konectis_after_ais_at_berth(self) -> None:
         payload = (
             "observed_at,latitude,longitude,speed_kn,course_deg,alarms,note\n"
             "2026-10-28T19:53:02Z,28.467751,-16.244101,0.6,339,,AIS MarineTraffic\n"
@@ -62,14 +65,51 @@ class AppendKonectisTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "positions.csv"
             path.write_text(payload, encoding="utf-8")
-            added = append_fix(
-                path,
-                parse_embed_page(FIXTURE),
-                note=NOTE,
+            changed = apply_konectis_fix(path, parse_embed_page(FIXTURE))
+            self.assertTrue(changed)
+            positions = validate_path(path)
+            self.assertEqual(len(positions), 2)
+            self.assertEqual(positions[-1].note, NOTE)
+
+    def test_updates_konectis_row_when_still_at_berth(self) -> None:
+        payload = (
+            "observed_at,latitude,longitude,speed_kn,course_deg,alarms,note\n"
+            "2026-10-28T19:53:02Z,28.467751,-16.244101,0.6,339,,AIS MarineTraffic\n"
+            "2026-11-05T00:40:50Z,28.467711,-16.244166,0,180,,GPS Konectis\n"
+        )
+        newer = parse_embed_page(
+            FIXTURE.replace(
+                '"received_datestamp_utc":"2026-11-05 00:40:50"',
+                '"received_datestamp_utc":"2026-11-08 01:03:32"',
             )
-            self.assertTrue(added)
-            latest = validate_path(path)[-1]
-            self.assertEqual(latest.note, NOTE)
+        )
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "positions.csv"
+            path.write_text(payload, encoding="utf-8")
+            changed = apply_konectis_fix(path, newer)
+            self.assertTrue(changed)
+            positions = validate_path(path)
+            self.assertEqual(len(positions), 2)
+            self.assertEqual(positions[-1].observed_at, newer.observed_at)
+
+    def test_appends_when_boat_moved(self) -> None:
+        payload = (
+            "observed_at,latitude,longitude,speed_kn,course_deg,alarms,note\n"
+            "2026-10-28T19:53:02Z,28.467751,-16.244101,0.6,339,,GPS Konectis\n"
+        )
+        moved = AisFix(
+            observed_at=datetime(2026, 11, 9, 8, 0, tzinfo=timezone.utc),
+            latitude=28.0,
+            longitude=-16.6,
+            speed_kn=5.0,
+            course_deg=200,
+        )
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "positions.csv"
+            path.write_text(payload, encoding="utf-8")
+            changed = apply_konectis_fix(path, moved)
+            self.assertTrue(changed)
+            self.assertEqual(len(validate_path(path)), 2)
 
 
 if __name__ == "__main__":
