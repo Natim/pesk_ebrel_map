@@ -203,5 +203,21 @@ observed_at,latitude,longitude,speed_kn,course_deg,alarms,note
 2026-10-28T18:01:42Z,28.391134,-16.293982,6.3,39,,AIS MarineTraffic
 2026-10-28T19:53:02Z,28.467751,-16.244101,0.6,339,,AIS MarineTraffic (Santa Cruz de Tenerife)
 2026-11-12T13:27:00Z,28.467754,-16.244166,0,0,,GPS Konectis
+2026-11-12T17:42:00Z,28.46775,-16.24417,3.9,158,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-12T18:03:00Z,28.44863,-16.23381,5.5,139,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-12T19:01:00Z,28.38131,-16.19385,7.0,163,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-12T20:06:00Z,28.25535,-16.17451,8.6,180,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-12T20:20:00Z,28.22678,-16.18700,8.6,227,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-13T00:44:00Z,27.95153,-16.52425,5.4,227,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-13T01:07:00Z,27.95248,-16.56526,5.4,277,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
 2026-11-13T01:37:00Z,27.958488,-16.617079,6,213,,GPS Konectis
+2026-11-13T02:10:00Z,27.96149,-16.65693,3.0,279,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-13T03:02:00Z,27.96487,-16.68138,5.4,279,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-13T04:04:00Z,27.97758,-16.72817,5.5,289,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-13T05:03:00Z,27.99810,-16.79554,3.9,288,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-13T06:01:00Z,28.01891,-16.86621,6.3,288,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-13T07:02:00Z,28.03867,-16.96298,6.3,283,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-13T08:00:00Z,28.05306,-17.03603,3.0,283,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-13T09:03:00Z,28.08250,-17.08897,4.6,287,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-13T09:26:39Z,28.087851,-17.1091,3,83,,AIS MarineTraffic (San Sebastián de La Gomera)
 2026-11-14T13:34:48Z,28.088779,-17.108374,0,329,,GPS Konectis
