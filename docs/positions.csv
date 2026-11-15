@@ -194,30 +194,26 @@ observed_at,latitude,longitude,speed_kn,course_deg,alarms,note
 2026-10-11T06:00:52Z,28.445284,-16.196899,3,278,,AIS MarineTraffic
 2026-10-11T07:00:44Z,28.461399,-16.245333,3,25,,AIS MarineTraffic
 2026-10-11T08:00:00Z,28.467617,-16.244267,0.6,81,,AIS MarineTraffic
-2026-10-24T13:58:07Z,28.000549,-16.606199,7.9,267,,AIS MarineTraffic
-2026-10-24T14:06:50Z,27.999901,-16.623417,6.3,264,,AIS MarineTraffic
-2026-10-28T10:58:26Z,27.952717,-16.562366,6.3,125,,AIS MarineTraffic
-2026-10-28T15:59:29Z,28.248884,-16.3603,5.5,13,,AIS MarineTraffic
-2026-10-28T16:07:14Z,28.258417,-16.357567,4.6,14,,AIS MarineTraffic
-2026-10-28T17:05:49Z,28.318783,-16.3403,3.9,359,,AIS MarineTraffic
-2026-10-28T18:01:42Z,28.391134,-16.293982,6.3,39,,AIS MarineTraffic
-2026-10-28T19:53:02Z,28.467751,-16.244101,0.6,339,,AIS MarineTraffic (Santa Cruz de Tenerife)
 2026-11-12T13:27:00Z,28.467754,-16.244166,0,0,,GPS Konectis
 2026-11-12T17:42:00Z,28.46775,-16.24417,3.9,158,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
 2026-11-12T18:03:00Z,28.44863,-16.23381,5.5,139,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
 2026-11-12T19:01:00Z,28.38131,-16.19385,7.0,163,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
-2026-11-12T20:06:00Z,28.25535,-16.17451,8.6,180,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
-2026-11-12T20:20:00Z,28.22678,-16.18700,8.6,227,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
-2026-11-13T00:44:00Z,27.95153,-16.52425,5.4,227,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
-2026-11-13T01:07:00Z,27.95248,-16.56526,5.4,277,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-12T19:39:54Z,28.330395,-16.174789,6.6,175,,GPS Navionics
+2026-11-12T20:00:00Z,28.292431,-16.173306,8.0,175,,GPS Navionics
+2026-11-12T21:00:00Z,28.188851,-16.206603,5.9,243,,GPS Navionics
+2026-11-12T22:00:00Z,28.136456,-16.319598,6.7,247,,GPS Navionics
+2026-11-12T23:00:00Z,28.060725,-16.390782,7.8,209,,GPS Navionics
+2026-11-13T00:00:00Z,27.957435,-16.438458,6.5,263,,GPS Navionics
+2026-11-13T01:00:00Z,27.952781,-16.552553,6.3,272,,GPS Navionics
 2026-11-13T01:37:00Z,27.958488,-16.617079,6,213,,GPS Konectis
-2026-11-13T02:10:00Z,27.96149,-16.65693,3.0,279,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
-2026-11-13T03:02:00Z,27.96487,-16.68138,5.4,279,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
-2026-11-13T04:04:00Z,27.97758,-16.72817,5.5,289,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
-2026-11-13T05:03:00Z,27.99810,-16.79554,3.9,288,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
-2026-11-13T06:01:00Z,28.01891,-16.86621,6.3,288,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
-2026-11-13T07:02:00Z,28.03867,-16.96298,6.3,283,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
-2026-11-13T08:00:00Z,28.05306,-17.03603,3.0,283,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
-2026-11-13T09:03:00Z,28.08250,-17.08897,4.6,287,,AIS MarineTraffic (heure/vitesse; position reportée sur la trace)
+2026-11-13T02:00:00Z,27.958677,-16.652679,4.2,273,,GPS Navionics
+2026-11-13T03:00:00Z,27.963242,-16.703447,5.0,289,,GPS Navionics
+2026-11-13T04:00:00Z,27.976176,-16.756102,4.0,289,,GPS Navionics
+2026-11-13T05:00:00Z,28.000903,-16.835010,1.9,265,,GPS Navionics
+2026-11-13T06:00:00Z,28.004559,-16.923959,4.9,282,,GPS Navionics
+2026-11-13T07:00:00Z,28.019553,-17.034323,6.3,267,,GPS Navionics
+2026-11-13T08:00:00Z,28.054053,-17.066285,3.1,273,,GPS Navionics
+2026-11-13T09:00:00Z,28.074508,-17.099152,3.5,276,,GPS Navionics
 2026-11-13T09:26:39Z,28.087851,-17.1091,3,83,,AIS MarineTraffic (San Sebastián de La Gomera)
+2026-11-13T09:36:40Z,28.088749,-17.108340,0.0,0,,GPS Navionics
 2026-11-15T01:44:06Z,28.088758,-17.108352,0,137,,GPS Konectis
