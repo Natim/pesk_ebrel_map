@@ -302,3 +302,4 @@ observed_at,latitude,longitude,speed_kn,course_deg,alarms,note
 2026-11-18T12:00:00Z,23.747266,-20.721706,5.5,201,,GPS Navionics
 2026-11-18T13:00:00Z,23.644503,-20.762553,6.1,198,,GPS Navionics
 2026-11-18T13:21:33Z,23.606163,-20.774049,6.1,195,,GPS Navionics
+2026-11-18T13:22:19Z,23.607119,-20.773752,12,201,,GPS Konectis
